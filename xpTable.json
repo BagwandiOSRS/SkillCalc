@@ -1,0 +1,15 @@
+{
+    "courses":[
+        {"courseName":"Gnome", "xs":86.5, "ds":35609},
+        {"courseName":"Draynor", "xs":120,"ds":33005},
+        {"courseName":"AlKharid", "xs":180,"ds":26648},
+        {"courseName":"Varrock", "xs":238,"ds":24410},
+        {"courseName":"Canifis", "xs":240,"ds":36842},
+        {"courseName":"Falador", "xs":440,"ds":26806},
+        {"courseName":"Seers", "xs":570,"ds":35205}, 
+        {"courseName":"Pollniv", "xs":890,"ds":33422},
+        {"courseName":"Rellekka", "xs":780,"ds":31063},
+        {"courseName":"Ardy", "xs":793,"ds":34440}
+
+    ]
+}

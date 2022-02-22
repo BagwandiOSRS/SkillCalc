@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> OSRS AGILITY PET CALCULATOR </title>
+
+    <script type = "module" src="./require.js" ></script>
+</head>
+
+<style type="text/css">
+
+    #header {
+        color:blue
+    }
+
+    #moretext { 
+        color:crimson 
+    }
+
+    input {
+            display: block
+    }
+</style>
+
+<body>
+
+    <h1 id="header" >Welcome to the Agility Pet Calculator</h1>
+    <h2 id="moretext" >Enter your starting and ending levels below</h2>
+
+    
+    <input type="number" placeholder="Starting Lvl"/>
+
+    <input type="number" placeholder="Ending Lvl"/>
+    
+    <button id="butt" onclick="example()">
+
+        Chance for Pet
+
+    </button>
+    
+    <h3 id="answer" > </h3>
+
+
+
+</body>
+
+<script>
+
+    var inputs = document.getElementsByTagName("input");
+
+/*   fetch("./xpTable.json")
+        .then(response => {
+            return response.json();
+        })
+    .then(data => console.log(data));*/
+
+   /* async function loadNames() {
+  const response = await fetch("./xpTable.json");
+  const theCourses = await response.json();
+  console.log(theCourses.courses[0]); 
+  return theCourses;
+  
+    }    */   
+
+
+
+
+    /*function load(){
+
+       const myCourses = loadNames(); 
+       console.log(myCourses);
+        
+    } */
+
+    
+   /* function example(){
+
+        let x = inputs[0].value;
+        let y = inputs[1].value;
+        const z = formula(x,y);
+        document.getElementById("answer").innerHTML = z;
+
+    } */
+
+    async function example(){ //async functions run linearly, rather than synchronously, awaits a response from xpTable.json
+
+        const response = await fetch("./xpTable.json");
+        const theCourses = await response.json();
+        console.log(theCourses.courses[0]);
+
+        let x = inputs[0].value;
+        let y = inputs[1].value;   
+        var b = 34440;
+        var r = 793;
+        const z = formula(x,y,b,r);
+        document.getElementById("answer").innerHTML = z;
+
+    }
+
+    // create a function that produces the b and r values for the formula
+
+
+    
+
+    const formula = (x,y,b,r) =>{
+
+    
+        var k = 0;
+        var chs = [];
+        var chss = [];
+        var xp = [];
+        var xpr =[];
+        //var b = 34440;
+        //var r = 793;
+        var last = [];
+
+        for(var i = 1; i<y;i++){
+
+            k = parseInt(i + 300 * Math.pow(2,i/7)); 
+           
+            xp[i] = Math.floor(k/4); //xp needed for each level
+            console.log(xp[i]);
+            xpr[i] = xp[i]/r; //laps needed at each level
+
+            chs[i] = 1/(b-(i*25));
+
+            chss[i] = Math.pow(1-chs[i],xpr[i]);
+
+            
+            
+        }
+        
+        last = chss.slice(Math.max(chss.length - (y-x),0));
+
+        var ans=last[0];
+
+        for(i=1;i<last.length;i++){
+            ans *= last[i];
+        }
+
+        return 1-ans;
+   
+    }
+
+
+
+
+</script>
+
+</html>
